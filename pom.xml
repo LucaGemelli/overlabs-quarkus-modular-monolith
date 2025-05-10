@@ -3,7 +3,7 @@
          xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>ketola.quarkus</groupId>
+  <groupId>overlabs.quarkus</groupId>
   <artifactId>quarkus-modular-monolith</artifactId>
   <packaging>pom</packaging>
   <version>1.0.0-SNAPSHOT</version>
@@ -15,21 +15,21 @@
   </modules>
 
   <properties>
-    <maven.compiler.release>21</maven.compiler.release>
+    <maven.compiler.release>24</maven.compiler.release>
     <maven.compiler.source>${maven.compiler.release}</maven.compiler.source>
     <maven.compiler.target>${maven.compiler.release}</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
     <assertj.version>3.25.3</assertj.version>
-    <compiler-plugin.version>3.13.0</compiler-plugin.version>
+    <compiler-plugin.version>3.14.0</compiler-plugin.version>
     <jandex-maven-plugin.version>3.1.7</jandex-maven-plugin.version>
-    <lombok.version>1.18.32</lombok.version>
-    <mapstruct.version>1.5.5.Final</mapstruct.version>
+    <lombok.version>1.18.38</lombok.version>
+    <mapstruct.version>1.6.3</mapstruct.version>
     <maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
-    <quarkus.platform.version>3.10.0</quarkus.platform.version>
+    <quarkus.platform.version>3.22.2</quarkus.platform.version>
     <surefire-plugin.version>3.2.5</surefire-plugin.version>
   </properties>
 
@@ -152,17 +152,17 @@
         <version>${mapstruct.version}</version>
       </dependency>
       <dependency>
-        <groupId>ketola.quarkus</groupId>
+        <groupId>overlabs.quarkus</groupId>
         <artifactId>book-service</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
-        <groupId>ketola.quarkus</groupId>
+        <groupId>overlabs.quarkus</groupId>
         <artifactId>loan-service</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
-        <groupId>ketola.quarkus</groupId>
+        <groupId>overlabs.quarkus</groupId>
         <artifactId>library-application</artifactId>
         <version>${project.version}</version>
       </dependency>
