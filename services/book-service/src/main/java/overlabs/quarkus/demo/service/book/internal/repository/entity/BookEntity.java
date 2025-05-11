@@ -1,9 +1,17 @@
 package overlabs.quarkus.demo.service.book.internal.repository.entity;
 
-import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
-import jakarta.persistence.*;
 import java.util.UUID;
-import lombok.*;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity(name = "Book")
 @Table(name = "book", schema = "book")
@@ -12,13 +20,13 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class BookEntity extends PanacheEntityBase {
+public class BookEntity {
 
     @Id
     @GeneratedValue
-    private UUID id;
+    UUID id;
 
     @Column(name = "name")
-    private String name;
+    String name;
 
 }
