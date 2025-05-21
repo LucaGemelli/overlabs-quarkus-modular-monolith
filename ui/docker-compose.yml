@@ -1,0 +1,26 @@
+services:
+  app:
+    container_name: mfe-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"  # home
+      - "3001:3001"  # dashboard
+      - "3002:3002"  # login
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+      - /app/.turbo
+    environment:
+      - NODE_ENV=development
+      - NEXT_TELEMETRY_DISABLED=1
+      - TURBO_TELEMETRY_DISABLED=1
+    command: npm run dev
+
+# Define a network, which allows containers to communicate
+# with each other, by using their container name as a hostname
+networks:
+  app_network:
+    external: true
