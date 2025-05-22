@@ -1,26 +1,65 @@
+version: '3.8'
+
 services:
-  app:
-    container_name: mfe-app
+  home:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: apps/home/Dockerfile
     ports:
-      - "3000:3000"  # home
-      - "3001:3001"  # dashboard
-      - "3002:3002"  # login
-    volumes:
-      - .:/app
-      - /app/node_modules
-      - /app/.next
-      - /app/.turbo
+      - "3000:3000"
     environment:
-      - NODE_ENV=development
-      - NEXT_TELEMETRY_DISABLED=1
-      - TURBO_TELEMETRY_DISABLED=1
-    command: npm run dev
+      - NODE_ENV=production
+      - DASHBOARD_URL=http://dashboard:3001
+      - LOGIN_URL=http://login:3002
+    networks:
+      - app-network
+    depends_on:
+      - dashboard
+      - login
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "http://localhost:3000"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
 
-# Define a network, which allows containers to communicate
-# with each other, by using their container name as a hostname
+  dashboard:
+    build:
+      context: .
+      dockerfile: apps/dashboard/Dockerfile
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=production
+      - HOME_URL=http://home:3000
+      - LOGIN_URL=http://login:3002
+    networks:
+      - app-network
+    depends_on:
+      - login
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "http://localhost:3001"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  login:
+    build:
+      context: .
+      dockerfile: apps/login/Dockerfile
+    ports:
+      - "3002:3002"
+    environment:
+      - NODE_ENV=production
+      - HOME_URL=http://home:3000
+      - DASHBOARD_URL=http://dashboard:3001
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "http://localhost:3002"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
 networks:
-  app_network:
-    external: true
+  app-network:
+    driver: bridge

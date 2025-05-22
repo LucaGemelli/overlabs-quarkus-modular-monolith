@@ -18,15 +18,8 @@ module.exports = {
         "plugin:@next/next/core-web-vitals",
     ],
     parserOptions: {
-        module,
-    },
-    compilerOptions: {
-        baseUrl: ".",
-        paths: {
-            "@/*": [
-                "./src/*"
-            ]
-        }
+        project,
+        tsconfigRootDir: process.cwd(),
     },
     globals: {
         React: true,
